@@ -22,3 +22,29 @@ function convertUri($inputUri)
 	$outputUri .= getEndOfPath($inputUri);
 	return $outputUri;
 }
+
+
+/**
+ * @todo missing test
+ */
+function renderAsJSON($jsonInString)
+{
+	header("Content-Type: text/javascript");
+	header('Access-Control-Allow-Origin: *');
+	header('Access-Control-Allow-Methods: GET, POST');
+	echo $jsonInString;
+}
+
+
+/**
+ * @todo missing test
+ */
+function readContentFromUrl($sourceURL)
+{
+	$ch = curl_init();
+	curl_setopt($ch, CURLOPT_URL, $sourceURL);
+	curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+	$data = curl_exec($ch);
+	curl_close($ch);
+	return $data;
+}
