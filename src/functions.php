@@ -24,6 +24,27 @@ function convertUri($inputUri)
 }
 
 
+function getTokenFromUri($inputUri)
+{
+	$search = '?access_token=';
+	$accessTokenPosition = strpos($inputUri, $search);
+	if ($accessTokenPosition === false) {
+		return '';
+	}
+	$accessToken = substr($inputUri, $accessTokenPosition+strlen($search));
+	return $accessToken;
+}
+
+
+function isValidUser($jsonInString)
+{
+	if ($jsonInString == '{"is-authorize":true}') {
+		return true;
+	}
+	return false;
+}
+
+
 /**
  * @todo missing test
  */
