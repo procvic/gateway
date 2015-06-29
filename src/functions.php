@@ -45,6 +45,15 @@ function isValidUser($jsonInString)
 }
 
 
+function mustCheckTokenForUrl($inputUri)
+{
+	if (getServiceNameFromUri($inputUri) == 'auth') {
+		return false;
+	}
+	return true;
+}
+
+
 /**
  * @todo missing test
  */
