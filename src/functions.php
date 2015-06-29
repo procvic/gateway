@@ -74,6 +74,10 @@ function readContentFromUrl($sourceURL)
 	$ch = curl_init();
 	curl_setopt($ch, CURLOPT_URL, $sourceURL);
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+	if (!empty($_POST)) {
+		curl_setopt($ch, CURLOPT_POST, count($_POST));
+		curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($_POST));
+	}
 	$data = curl_exec($ch);
 	curl_close($ch);
 	return $data;
