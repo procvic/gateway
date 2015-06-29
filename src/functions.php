@@ -18,7 +18,10 @@ function convertUri($inputUri)
 {
 	$outputUri = 'http://';
 	$outputUri .= getServiceNameFromUri($inputUri);
-	$outputUri .= '.services.procvic.cz/';
+	if (getServiceNameFromUri($inputUri) != 'auth') {
+		$outputUri .= '.services';
+	}
+	$outputUri .= '.procvic.cz/';
 	$outputUri .= getEndOfPath($inputUri);
 	return $outputUri;
 }
