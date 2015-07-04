@@ -77,11 +77,38 @@ function readContentFromUrl($sourceURL)
 	$ch = curl_init();
 	curl_setopt($ch, CURLOPT_URL, $sourceURL);
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-	if (!empty($_POST)) {
-		curl_setopt($ch, CURLOPT_POST, count($_POST));
-		curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($_POST));
+	$dataFromRequest = readDataFromRequest();
+	if (!empty($dataFromRequest)) {
+		curl_setopt($ch, CURLOPT_POST, count($dataFromRequest));
+		curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($dataFromRequest));
 	}
 	$data = curl_exec($ch);
 	curl_close($ch);
 	return $data;
+}
+
+
+/**
+ * @todo missing test
+ */
+function readDataFromRequest()
+{
+	$dataInString = file_get_contents('php://input');
+	if (empty($dataInString)) {
+		return [];
+	} else if (isJson($dataInString)) {
+		return json_decode($dataInString);
+	} else {
+		parse_str($dataInString, $data);
+		return $data;
+	}
+}
+
+
+function isJson($dataInString)
+{
+	if (json_decode($dataInString) === NULL) {
+		return FALSE;
+	}
+	return TRUE;
 }
