@@ -16,5 +16,5 @@ if (mustCheckTokenForUrl($oldUri)) {
 	}
 }
 
-$content = (string) readContentFromUrl($newUri);
+$content = readContentFromUrl($newUri);
 renderAsJSON($content);

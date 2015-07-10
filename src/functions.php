@@ -60,12 +60,13 @@ function mustCheckTokenForUrl($inputUri)
 /**
  * @todo missing test
  */
-function renderAsJSON($jsonInString)
+function renderAsJSON($data)
 {
 	header("Content-Type: text/javascript");
 	header('Access-Control-Allow-Origin: *');
 	header('Access-Control-Allow-Methods: GET, POST');
-	echo $jsonInString;
+	http_response_code($data['status-code']);
+	echo $data['data'];
 }
 
 
@@ -83,8 +84,12 @@ function readContentFromUrl($sourceURL)
 		curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($dataFromRequest));
 	}
 	$data = curl_exec($ch);
+	$statusCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 	curl_close($ch);
-	return $data;
+	return [
+		'data' => (string) $data,
+		'status-code' => $statusCode,
+	];
 }
 
 
