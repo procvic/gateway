@@ -8,10 +8,13 @@ $userToken = getTokenFromUri($oldUri);
 $urlForAuthorizeUser = 'auth.procvic.cz/authorize?access_token=' . $userToken;
 
 if (mustCheckTokenForUrl($oldUri)) {
-	$userValidJson = (string) readContentFromUrl($urlForAuthorizeUser);
-	$isUserLogIn = isValidUser($userValidJson);
+	$userValidJson = readContentFromUrl($urlForAuthorizeUser);
+	$isUserLogIn = isValidUser($userValidJson['data']);
 	if (!$isUserLogIn) {
-		renderAsJSON('{"error":"Unauthorize request."}');
+		renderAsJSON([
+			'data' => '{"error":"Unauthorize request."}',
+			'status-code' => 401,
+		]);
 		die;
 	}
 }
