@@ -27,6 +27,15 @@ function convertUri($inputUri)
 }
 
 
+function getToken($requestUri, $headersInArray)
+{
+	if (getTokenFromUri($requestUri) != '') {
+		return getTokenFromUri($requestUri);
+	}
+	return getTokenFromHeaders($headersInArray);
+}
+
+
 function getTokenFromUri($inputUri)
 {
 	$search = '?access_token=';
@@ -36,6 +45,15 @@ function getTokenFromUri($inputUri)
 	}
 	$accessToken = substr($inputUri, $accessTokenPosition+strlen($search));
 	return $accessToken;
+}
+
+
+function getTokenFromHeaders($headersInArray)
+{
+	if (!isset($headersInArray['Access_token'])) {
+		return '';
+	}
+	return $headersInArray['Access_token'];
 }
 
 
