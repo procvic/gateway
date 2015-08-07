@@ -1,6 +1,6 @@
 <?php
 
-include __DIR__ . '/../src/functions.php';
+include __DIR__ . '/../../src/functions.php';
 
 assert_options(ASSERT_ACTIVE, 1);
 
