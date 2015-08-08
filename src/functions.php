@@ -76,7 +76,7 @@ function mustCheckTokenForUrl($inputUri)
 
 
 /**
- * @todo missing test
+ * @internal this function has only an integration test
  */
 function renderAsJSON($data)
 {
@@ -89,7 +89,7 @@ function renderAsJSON($data)
 
 
 /**
- * @todo missing test
+ * @internal this function has only an integration test
  */
 function readContentFromUrl($sourceURL)
 {
@@ -112,7 +112,7 @@ function readContentFromUrl($sourceURL)
 
 
 /**
- * @todo missing test
+ * @internal this function has only an integration test
  */
 function readDataFromRequest()
 {
