@@ -71,6 +71,9 @@ function mustCheckTokenForUrl($inputUri)
 	if (getServiceNameFromUri($inputUri) == 'auth') {
 		return false;
 	}
+	if (getServiceNameFromUri($inputUri) == 'users' && getEndOfPath($inputUri) == 'add/') {
+		return false;
+	}
 	return true;
 }
 
